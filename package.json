@@ -1,0 +1,25 @@
+{
+  "name": "atlas-travel-planner",
+  "version": "1.0.0",
+  "description": "An AI-powered immersive travel planner featuring cinematic storytelling, Node.js backend APIs, and local JSON persistence.",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.19.2"
+  },
+  "keywords": [
+    "travel",
+    "planner",
+    "cinematic",
+    "express",
+    "backend",
+    "persistence"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}

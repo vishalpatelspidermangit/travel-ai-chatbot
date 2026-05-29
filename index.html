@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas — Immersive Cinematic Travel Planner</title>
+  <meta name="description" content="Design deeply personalized travel experiences that feel like a directed documentary. Custom itineraries, hidden gems, and emotional memory design.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-default">
+  
+  <!-- Glowing Background Orbs for Ambient Lighting -->
+  <div class="ambient-glow">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="app-nav">
+    <div class="nav-container">
+      <div class="logo-group" id="btn-logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          <path d="M2 12h20" />
+        </svg>
+        <span class="logo-text">ATLAS</span>
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-secondary btn-sm hide" id="btn-back-to-dream">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          New Dream
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <!-- VIEW 1: HERO LANDING SCREEN -->
+    <section id="view-hero" class="view-panel active">
+      <div class="hero-content">
+        <div class="badge-premium">Immersive Travel Curation</div>
+        <h1 class="hero-title">The Art of <br><span class="text-gradient">Cinematic Travel</span></h1>
+        <p class="hero-subtitle">Step out of the ordinary. Describe the trip you’ve been dreaming about and let Atlas compile an emotionally rich, off-beat visual guide.</p>
+        
+        <!-- Search Prompt Box -->
+        <div class="prompt-box">
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="input-destination" placeholder="Where has your mind been wandering lately? (e.g. Kyoto, Rome, Bali...)" autocomplete="off">
+          </div>
+          <button class="btn btn-primary" id="btn-start-dreaming">
+            Begin Curation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-md">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Curated Destination Quick-Links -->
+        <div class="curated-section">
+          <h2 class="section-tag">Or wander through our curated models</h2>
+          <div class="curated-grid">
+            
+            <div class="curated-card card-tokyo" data-destination="tokyo">
+              <div class="card-overlay"></div>
+              <div class="card-body">
+                <span class="card-country">Japan</span>
+                <h3 class="card-name">Tokyo</h3>
+                <p class="card-vibe">Neon Rivers & Zen Silence</p>
+              </div>
+            </div>
+
+            <div class="curated-card card-paris" data-destination="paris">
+              <div class="card-overlay"></div>
+              <div class="card-body">
+                <span class="card-country">France</span>
+                <h3 class="card-name">Paris</h3>
+                <p class="card-vibe">Golden Mists & Philosophers</p>
+              </div>
+            </div>
+
+            <div class="curated-card card-amalfi" data-destination="amalfi">
+              <div class="card-overlay"></div>
+              <div class="card-body">
+                <span class="card-country">Italy</span>
+                <h3 class="card-name">Amalfi Coast</h3>
+                <p class="card-vibe">Azure Cliffs & Lemon Air</p>
+              </div>
+            </div>
+
+            <div class="curated-card card-iceland" data-destination="iceland">
+              <div class="card-overlay"></div>
+              <div class="card-body">
+                <span class="card-country">Iceland</span>
+                <h3 class="card-name">Iceland</h3>
+                <p class="card-vibe">Fire Plains & Glacial Giants</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Saved Journeys Section (Dynamic Persisted Database) -->
+        <div class="curated-section hide" id="sec-saved-journeys" style="margin-top: 3.5rem;">
+          <h2 class="section-tag">Your Persisted Cinematic Journeys</h2>
+          <div class="curated-grid" id="saved-journeys-grid">
+            <!-- Dynamically populated via app.js list call -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: ONBOARDING WIZARD SCREEN -->
+    <section id="view-wizard" class="view-panel">
+      <div class="wizard-container glass-container">
+        <!-- Wizard Navigation / Progress Tracker -->
+        <div class="wizard-header">
+          <div class="progress-bar-wrapper">
+            <div class="progress-fill" id="progress-bar" style="width: 25%;"></div>
+          </div>
+          <div class="step-counter">Step <span id="current-step-num">1</span> of 4</div>
+        </div>
+
+        <div class="wizard-content">
+          <!-- STEP 1: DESTINATION & DURATION -->
+          <div class="wizard-step active" data-step="1">
+            <h3 class="step-title">The Coordinates of Your Mind</h3>
+            <p class="step-desc">Establish the destination and timing of your escape.</p>
+            
+            <div class="form-group">
+              <label for="wiz-destination">Destination</label>
+              <input type="text" id="wiz-destination" class="form-control" placeholder="Enter city or region">
+            </div>
+
+            <div class="form-group mt-lg">
+              <label>Duration of your escape</label>
+              <div class="days-slider-container">
+                <input type="range" id="wiz-duration" min="2" max="14" value="3" class="range-slider">
+                <div class="slider-value-display"><span id="duration-val">3</span> Days</div>
+              </div>
+              <p class="input-helper">We specialize in slow-paced, atmospheric pacing between 2 and 14 days.</p>
+            </div>
+          </div>
+
+          <!-- STEP 2: BUDGET & COMPANIONS -->
+          <div class="wizard-step" data-step="2">
+            <h3 class="step-title">The Pacing of Indulgence</h3>
+            <p class="step-desc">Select how you prefer to move and stay.</p>
+            
+            <label class="form-label">Budget Tier</label>
+            <div class="budget-tiers-grid">
+              <div class="tier-card active" data-budget="comfort">
+                <div class="tier-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </div>
+                <h4>Curated Comfort</h4>
+                <p>Authentic boutique stays, artisanal dining, and rich local guides.</p>
+              </div>
+
+              <div class="tier-card" data-budget="budget">
+                <div class="tier-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="2" y="6" width="20" height="12" rx="2" />
+                    <circle cx="12" cy="12" r="2" />
+                    <path d="M6 12h.01M18 12h.01" />
+                  </svg>
+                </div>
+                <h4>Explorer Tier</h4>
+                <p>Architectural social hostels, local street eats, and self-guided paths.</p>
+              </div>
+
+              <div class="tier-card" data-budget="luxury">
+                <div class="tier-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+                <h4>Ultra-Luxury Concierge</h4>
+                <p>Private historic estates, Michelin culinary art, and bespoke charters.</p>
+              </div>
+            </div>
+
+            <div class="form-group mt-lg">
+              <label>Companions on this journey</label>
+              <div class="chip-selector" id="companion-chips">
+                <button class="chip-btn active" data-val="solo">Solo Wanderer</button>
+                <button class="chip-btn" data-val="partner">Romantic Partner</button>
+                <button class="chip-btn" data-val="friends">Curated Friends</button>
+                <button class="chip-btn" data-val="family">Family Circle</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: PREFERRED VIBE -->
+          <div class="wizard-step" data-step="3">
+            <h3 class="step-title">The Texture of Atmosphere</h3>
+            <p class="step-desc">What visual tone and sensory rhythm speaks to you today?</p>
+            
+            <div class="vibes-grid">
+              <div class="vibe-card active" data-vibe="cafes">
+                <span class="vibe-emoji">☕</span>
+                <h5>Aesthetic Cafés</h5>
+                <p>Slow morning drip coffee, local book stalls, and soft acoustics.</p>
+              </div>
+
+              <div class="vibe-card" data-vibe="luxury">
+                <span class="vibe-emoji">✨</span>
+                <h5>Luxury Ease</h5>
+                <p>Sumptuous details, historical lounges, and tailored care.</p>
+              </div>
+
+              <div class="vibe-card" data-vibe="nature">
+                <span class="vibe-emoji">🌲</span>
+                <h5>Wilds & Nature</h5>
+                <p>Steaming geothermal vents, ancient pine trees, and wide horizons.</p>
+              </div>
+
+              <div class="vibe-card" data-vibe="calm">
+                <span class="vibe-emoji">🧘</span>
+                <h5>Quiet Solitude</h5>
+                <p>Hidden garden pavilions, low incense, and morning meditation.</p>
+              </div>
+
+              <div class="vibe-card" data-vibe="romantic">
+                <span class="vibe-emoji">🍷</span>
+                <h5>Poetic Romance</h5>
+                <p>Candlelight bistros, wooden bridge strolls, and rose twilight.</p>
+              </div>
+
+              <div class="vibe-card" data-vibe="culture">
+                <span class="vibe-emoji">🏮</span>
+                <h5>Local Culture</h5>
+                <p>Century-old recipes, historic paper crafts, and elder wisdom.</p>
+              </div>
+
+              <div class="vibe-card" data-vibe="adventure">
+                <span class="vibe-emoji">🥾</span>
+                <h5>Pure Adventure</h5>
+                <p>Steep ridge climbing, rocky fjords, and unexpected detours.</p>
+              </div>
+
+              <div class="vibe-card" data-vibe="photography">
+                <span class="vibe-emoji">📷</span>
+                <h5>Chiaroscuro & Lens</h5>
+                <p>Vantage points, golden hour symmetry, and long street shadows.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4: EMOTIONAL MEMORIES -->
+          <div class="wizard-step" data-step="4">
+            <h3 class="step-title">The Memory Blueprint</h3>
+            <p class="step-desc">Select the exact moments you want to carry home inside your heart.</p>
+            
+            <div class="memories-list">
+              <label class="memory-checkbox-card">
+                <input type="checkbox" name="memories" value="rain" checked>
+                <div class="checkbox-indicator"></div>
+                <div class="memory-card-content">
+                  <h5>Getting beautifully lost in misty rain backstreets</h5>
+                  <p>Hearing water drop from wooden shingle roofs while the city slows down.</p>
+                </div>
+              </label>
+
+              <label class="memory-checkbox-card">
+                <input type="checkbox" name="memories" value="recipe" checked>
+                <div class="checkbox-indicator"></div>
+                <div class="memory-card-content">
+                  <h5>Sipping warm sake/wine in a four-seat wooden counter bar</h5>
+                  <p>Connecting with a local owner who operates their craft out of pure passion.</p>
+                </div>
+              </label>
+
+              <label class="memory-checkbox-card">
+                <input type="checkbox" name="memories" value="sunrise">
+                <div class="checkbox-indicator"></div>
+                <div class="memory-card-content">
+                  <h5>Watching the dawn mist rise from an empty forest shrine/terrace</h5>
+                  <p>Experiencing a world completely void of tourist noise before the day wakes up.</p>
+                </div>
+              </label>
+
+              <label class="memory-checkbox-card">
+                <input type="checkbox" name="memories" value="vinyl">
+                <div class="checkbox-indicator"></div>
+                <div class="memory-card-content">
+                  <h5>Listening to aged vinyl inside a vintage wood-paneled salon</h5>
+                  <p>Letting warm brass notes wash over you in a space smelling of antique paper.</p>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wizard Navigation Controls -->
+        <div class="wizard-footer">
+          <button class="btn btn-secondary" id="btn-wiz-prev" disabled>Back</button>
+          <button class="btn btn-primary" id="btn-wiz-next">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: CINEMATIC LOADER SCREEN -->
+    <section id="view-loader" class="view-panel">
+      <div class="loader-content">
+        <div class="loader-spinner">
+          <div class="spinner-core"></div>
+        </div>
+        <h2 id="loader-title">Curating hidden pathways...</h2>
+        <p id="loader-subtitle" class="loader-status">Gathering atmospheric particles...</p>
+      </div>
+    </section>
+
+    <!-- VIEW 4: THE TRAVEL DASHBOARD -->
+    <section id="view-dashboard" class="view-panel">
+      <div class="dashboard-grid">
+        
+        <!-- SIDEBAR: CURATION METADATA & HIGHLIGHTS -->
+        <aside class="dash-sidebar">
+          <div class="cover-photo-wrapper">
+            <div class="cover-image" id="dash-cover-img"></div>
+            <div class="cover-overlay"></div>
+            <div class="cover-content">
+              <span class="cover-country" id="dash-country">Japan</span>
+              <h2 class="cover-title" id="dash-destination-title">Tokyo</h2>
+              <p class="cover-coords" id="dash-coordinates">35.6762° N, 139.6503° E</p>
+            </div>
+          </div>
+
+          <div class="sidebar-stats glass-card mt-md">
+            <div class="stat-item">
+              <span class="stat-label">Duration</span>
+              <span class="stat-value" id="dash-duration">3 Days</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Pacing</span>
+              <span class="stat-value" id="dash-pacing">Atmospheric</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Companion</span>
+              <span class="stat-value text-capitalize" id="dash-companion">Solo</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Vibe Vibe</span>
+              <span class="stat-value text-capitalize" id="dash-vibe">Aesthetic Cafés</span>
+            </div>
+          </div>
+
+          <div class="sidebar-best-time glass-card mt-md">
+            <h5>Best Season for Drift</h5>
+            <p id="dash-best-time">Late March to April (Sakura Bloom) or November (Golden Gingko Leaves)</p>
+          </div>
+
+          <!-- Memory Highlight Card (Cinematic Peak) -->
+          <div class="memory-highlight-card glass-card mt-md glowing-border">
+            <div class="memory-tag">Memory Highlight</div>
+            <h4 id="dash-memory-title">A Quiet Rain in Shinjuku Gyoen</h4>
+            <p id="dash-memory-desc">It is late afternoon, and a soft, misty rain begins to fall. You seek shelter inside a traditional wooden tea pavilion beside a quiet pond. As you hold a warm ceramic bowl of matcha, you watch water droplets ripple across the green water...</p>
+          </div>
+        </aside>
+
+        <!-- MAIN WINDOW: DYNAMIC CONTENT PANEL -->
+        <article class="dash-main-content">
+          <!-- Main Content Header -->
+          <div class="dash-main-header">
+            <div class="header-nav-tabs">
+              <button class="tab-btn active" data-tab="itinerary">Itinerary</button>
+              <button class="tab-btn" data-tab="food">Culinary & Cafés</button>
+              <button class="tab-btn" data-tab="gems">Hidden Gems</button>
+              <button class="tab-btn" data-tab="budget">Budget Snapshot</button>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <button class="btn btn-primary btn-sm" id="btn-save-itinerary" style="box-shadow: 0 2px 8px var(--accent-glow);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                  <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                  <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
+                Save Journey
+              </button>
+              <button class="btn btn-secondary btn-sm" id="btn-export-itinerary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Print Guide
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB CONTENT: ITINERARY -->
+          <div class="tab-content active" id="tab-itinerary">
+            <div class="overview-block glass-card mb-md">
+              <h5>The Architectural Rhythm</h5>
+              <p id="dash-base-vibe">A breathtaking collision of hyper-futurism and ancient quietude.</p>
+              <div class="stay-info mt-sm">
+                <strong>Base Sanctuary:</strong> <span id="dash-stay">Nihonbashi Capsule — sleek, architect-designed micro-spaces.</span>
+              </div>
+            </div>
+
+            <!-- Vertical Timeline Itinerary -->
+            <div class="timeline-container" id="timeline-itinerary-container">
+              <!-- Dynamically populated via app.js -->
+            </div>
+          </div>
+
+          <!-- TAB CONTENT: FOOD & CAFES -->
+          <div class="tab-content" id="tab-food">
+            <div class="food-cards-grid" id="food-container">
+              <!-- Dynamically populated via app.js -->
+            </div>
+          </div>
+
+          <!-- TAB CONTENT: GEMS & PHOTOS -->
+          <div class="tab-content" id="tab-gems">
+            <div class="gems-section">
+              <h4 class="content-sec-title">Off-Beat Hidden Gems</h4>
+              <div class="gems-list-container" id="gems-container">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <div class="photo-spots-section mt-lg">
+              <h4 class="content-sec-title">Cinematic Photographic Vantage Points</h4>
+              <div class="photo-spots-grid" id="photo-spots-container">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB CONTENT: BUDGET CALCULATOR -->
+          <div class="tab-content" id="tab-budget">
+            <div class="budget-calculator-grid">
+              <div class="budget-chart-panel glass-card">
+                <h5>Estimated Expenses Breakdown</h5>
+                <div class="chart-box">
+                  <canvas id="budgetDonutChart" width="220" height="220"></canvas>
+                  <div class="chart-center-value">
+                    <span id="chart-total-cost">$1,230</span>
+                    <small>Est. Total</small>
+                  </div>
+                </div>
+                <div class="chart-legend" id="budget-legend">
+                  <!-- JS populated -->
+                </div>
+              </div>
+
+              <div class="budget-controls-panel glass-card">
+                <h5>Refine Your Budget Pacing</h5>
+                <p class="section-desc mb-md">Adjust the sliders below to see your estimated costs scale between backpacker and luxury pacing.</p>
+                
+                <div class="control-slider-group">
+                  <div class="slider-header">
+                    <label for="slider-flights">Flights & Long Transit</label>
+                    <span class="slider-indicator" id="val-flights">$650</span>
+                  </div>
+                  <input type="range" id="slider-flights" min="100" max="4000" step="50" class="range-slider">
+                </div>
+
+                <div class="control-slider-group mt-md">
+                  <div class="slider-header">
+                    <label for="slider-lodging">Accommodation / Stays</label>
+                    <span class="slider-indicator" id="val-lodging">$280</span>
+                  </div>
+                  <input type="range" id="slider-lodging" min="50" max="6000" step="50" class="range-slider">
+                </div>
+
+                <div class="control-slider-group mt-md">
+                  <div class="slider-header">
+                    <label for="slider-dining">Dining & Cafés</label>
+                    <span class="slider-indicator" id="val-dining">$180</span>
+                  </div>
+                  <input type="range" id="slider-dining" min="30" max="3000" step="10" class="range-slider">
+                </div>
+
+                <div class="control-slider-group mt-md">
+                  <div class="slider-header">
+                    <label for="slider-activities">Experiences & Admissions</label>
+                    <span class="slider-indicator" id="val-activities">$120</span>
+                  </div>
+                  <input type="range" id="slider-activities" min="20" max="2500" step="10" class="range-slider">
+                </div>
+
+                <div class="control-slider-group mt-md">
+                  <div class="slider-header">
+                    <label for="slider-transit">Local Metro / Ferry</label>
+                    <span class="slider-indicator" id="val-transit">$60</span>
+                  </div>
+                  <input type="range" id="slider-transit" min="10" max="800" step="5" class="range-slider">
+                </div>
+              </div>
+            </div>
+
+            <!-- Practical Local Tips Card -->
+            <div class="local-tips-container glass-card mt-md" id="tips-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 ATLAS Inc. All rights reserved. Designed to generate lasting emotional memories.</p>
+    </div>
+  </footer>
+
+  <!-- Core Scripts -->
+  <script src="app.js"></script>
+
+  <!-- Floating AI Chatbot Concierge -->
+  <button class="chat-trigger-btn" id="btn-chat-trigger" aria-label="Ask Atlas Concierge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="chat-icon">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <span class="chat-trigger-pulse"></span>
+  </button>
+
+  <div class="chat-widget-container glass-container" id="chat-widget">
+    <div class="chat-header">
+      <div class="chat-avatar-group">
+        <div class="chat-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+          <span class="avatar-status-dot"></span>
+        </div>
+        <div class="chat-header-text">
+          <h4>Atlas Concierge</h4>
+          <p>Live Cinematic Companion</p>
+        </div>
+      </div>
+      <div class="chat-header-right">
+        <div class="concierge-mode-selector">
+          <span class="mode-label">Detailed Mode</span>
+          <label class="switch">
+            <input type="checkbox" id="chat-mode-toggle">
+            <span class="slider-toggle"></span>
+          </label>
+        </div>
+        <button class="chat-close-btn" id="btn-chat-close" aria-label="Minimize Chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="chat-messages-log" id="chat-messages-log">
+      <div class="chat-bubble chat-bubble-atlas">
+        <p>Greetings, wanderer. I am **Atlas**, your immersive travel concierge. Ask me anything about your current itinerary, local cultural discovery, or secret paths you wish to traverse.</p>
+      </div>
+    </div>
+    
+    <form class="chat-input-form" id="chat-input-form" autocomplete="off">
+      <input type="text" id="input-chat-message" placeholder="Ask Atlas about your journey..." required>
+      <button type="submit" class="chat-send-btn" id="btn-chat-send" aria-label="Send Message">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+  </div>
+</body>
+</html>

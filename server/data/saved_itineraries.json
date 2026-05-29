@@ -1,0 +1,77 @@
+[
+  {
+    "id": "mock-tokyo-1",
+    "name": "Tokyo",
+    "tagline": "Neon Rivers & Sacred Silence",
+    "country": "Japan",
+    "themeClass": "theme-tokyo",
+    "coordinates": "35.6762° N, 139.6503° E",
+    "duration": 3,
+    "budgetTier": "comfort",
+    "companion": "partner",
+    "vibe": "cafes",
+    "stay": "Hotel 1899 Tokyo — a tea-themed sanctuary in Shimbashi, where rooms smell faintly of green tea and overlook quiet alleys.",
+    "bestTime": "Late March to April (Sakura Bloom) or November (Golden Gingko Leaves)",
+    "baseVibe": "A breathtaking collision of hyper-futurism and ancient quietude.",
+    "budgetEstimate": {
+      "flights": 950,
+      "lodging": 900,
+      "dining": 900,
+      "activities": 600,
+      "transit": 200
+    },
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Neon Rain & Golden Lanterns",
+        "description": "Arrive in the city as dusk falls, painting the towering glass canyons in shades of violet and cobalt. Check into your sanctuary and prepare to step into a different pacing of life.",
+        "schedule": [
+          {
+            "time": "09:00 AM",
+            "activity": "Meiji Jingu Shrine",
+            "detail": "Walk the gravel paths beneath 100-year-old cedar trees. The sound of Tokyo fades away instantly, replaced by the rustle of leaves and the low chime of wooden prayer tablets."
+          },
+          {
+            "time": "02:00 PM",
+            "activity": "Aoyama Café Crawl",
+            "detail": "Discover café culture tucked inside residential backstreets. Watch baristas pull espresso shots with laboratory precision in glass-walled minimalist bars."
+          },
+          {
+            "time": "06:30 PM",
+            "activity": "Omoide Yokocho",
+            "detail": "Dine under glowing red paper lanterns in narrow alleys. Sip warm sake in a wooden counter bar that seats only four people, listening to the soft sizzle of yakitori."
+          }
+        ]
+      }
+    ],
+    "food": [
+      {
+        "name": "Chacha Koubou (Nishi-Waseda)",
+        "type": "Teahouse & Sweets",
+        "atmosphere": "A quiet wooden house tucked away from the main road. The interior is filled with soft acoustic guitar and the scent of roasting hojicha tea."
+      }
+    ],
+    "hiddenGems": [
+      {
+        "name": "Todoroki Valley",
+        "vibe": "A lush, jungle-like ravine hidden completely inside the urban boundaries of southern Tokyo. You walk along a wooden deck next to a bubbling stream, hearing cicadas and looking up at concrete bridges towering hundreds of feet above."
+      }
+    ],
+    "photoSpots": [
+      {
+        "location": "Shinjuku Alleyways (Dusk)",
+        "description": "Position yourself at the entrance of Omoide Yokocho just as the lanterns light up, capturing the contrast between neon signs and rising steam."
+      }
+    ],
+    "tips": [
+      {
+        "title": "The Silent Carriage",
+        "detail": "Trains are sacred spaces of silence. Avoid talking or phone calls; download your playlists beforehand and let the city slide past your window silently."
+      }
+    ],
+    "memoryHighlight": {
+      "title": "A Quiet Rain in Shinjuku Gyoen",
+      "description": "It is late afternoon, and a soft, misty rain begins to fall over Shinjuku Gyoen. You seek shelter inside a traditional wooden tea pavilion beside a quiet pond. As you hold a warm ceramic bowl of matcha, you watch water droplets ripple across the surface of the green water. Across the pond, the massive skyscrapers of Shinjuku loom like sleeping giants in the fog, completely silent. In this single breath, the frantic energy of the world's largest metropolis dissolves into absolute, cinematic stillness. You smell wet cedar and damp earth, holding onto a warmth that stays with you long after you leave."
+    }
+  }
+]
