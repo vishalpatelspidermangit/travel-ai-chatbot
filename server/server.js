@@ -3,9 +3,9 @@
  * Serves APIs and the static client frontend under a single portal.
  */
 
-require("dotenv").config();
 const express = require("express");
 const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "../.env") });
 const fs = require("fs");
 const cors = require("cors");
 const { generateItinerary } = require("./generator");
@@ -281,5 +281,6 @@ app.listen(PORT, () => {
   console.log(`\n=============================================================`);
   console.log(`  ATLAS TRAVEL PLANNER UNIFIED SERVER ACTIVE`);
   console.log(`  ➜ Local Portal: http://localhost:${PORT}/`);
+  console.log(`  ➜ GROQ API Key Loaded: ${process.env.GROQ_API_KEY ? "YES (Secure)" : "NO"}`);
   console.log(`=============================================================\n`);
 });
